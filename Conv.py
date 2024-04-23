@@ -20,7 +20,7 @@ def Home():
 def Search():
     if request.method == "POST":
         search_query = request.form['search_query']
-        query = f"SELECT * FROM Table_2 WHERE bond_number LIKE '%{search_query}%' OR Name_of_the_Purchaser LIKE '%{search_query}%';"
+        query = f"SELECT * FROM eci2 WHERE bond_number LIKE '%{search_query}%' OR Name_of_the_Purchaser LIKE '%{search_query}%';"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
