@@ -6,13 +6,10 @@ import matplotlib.pyplot as plt
 import io
 import base64
 
-if not os.path.exists("Conv.py"):
-    raise RuntimeError("Incorrect Working Directory: set directory to Server")
-
 app = Flask(__name__)
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "123@Lalith"
-app.config["MYSQL_DB"] = "ES113"
+app.config["MYSQL_DB"] = "es113"
 mysql = MySQL(app)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -23,8 +20,7 @@ def Home():
 def Search():
     if request.method == "POST":
         search_query = request.form['search_query']
-
-        query = f"SELECT * FROM eci2 WHERE bond\nnumber LIKE '%{search_query}%' OR Name\nof\nthe\nPurchaser LIKE '%{search_query}%';"
+        query = f"SELECT * FROM Table_2 WHERE bond_number LIKE '%{search_query}%' OR Name_of_the_Purchaser LIKE '%{search_query}%';"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
