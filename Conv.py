@@ -12,7 +12,6 @@ if not os.path.exists("Conv.py"):
 app = Flask(__name__)
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "123@Lalith"
-app.config["MYSQL_DB"] = "es113"
 app.config["MYSQL_DB"] = "ES113"
 mysql = MySQL(app)
 
@@ -24,8 +23,6 @@ def Home():
 def Search():
     if request.method == "POST":
         search_query = request.form['search_query']
-        # Modify the query to search based on bond number or any other column
-        query = f"SELECT * FROM Table_2 WHERE bond_number LIKE '%{search_query}%' OR Company name LIKE '%{search_query}%';"
         query = f"SELECT * FROM eci2 WHERE bond_number LIKE '%{search_query}%' OR Name_of_the_Purchaser LIKE '%{search_query}%';"
         cur = mysql.connection.cursor()
         cur.execute(query)
@@ -36,10 +33,6 @@ def Search():
 def Company():
     if request.method == "POST":
         selected_company = request.form['selected_company']
-        # Fetch data from the database based on the selected company
-        # Calculate totahbkbhjl bonds and value per year
-        # Generate bar plot
-        # Save plot to a bytes buffer
         bytes_image = io.BytesIO()
         plt.savefig(bytes_image, format='png')
         bytes_image.seek(0)
@@ -47,7 +40,6 @@ def Company():
         plt.close()
         return render_template('company_data.html', image=base64_image)
 
-# Add similar routes for other functionalities (e.g., political party selection, company donation analysis)
 
 if __name__ == "__main__":
     app.run(debug=True)
