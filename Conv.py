@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "123@Lalith"
 app.config["MYSQL_DB"] = "es113"
+app.config["MYSQL_DB"] = "ES113"
 mysql = MySQL(app)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -25,6 +26,7 @@ def Search():
         search_query = request.form['search_query']
         # Modify the query to search based on bond number or any other column
         query = f"SELECT * FROM Table_2 WHERE bond_number LIKE '%{search_query}%' OR Company name LIKE '%{search_query}%';"
+        query = f"SELECT * FROM eci2 WHERE bond_number LIKE '%{search_query}%' OR Name_of_the_Purchaser LIKE '%{search_query}%';"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
