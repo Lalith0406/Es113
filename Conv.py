@@ -24,7 +24,7 @@ def Search():
     if request.method == "POST":
         search_query = request.form['search_query']
         # Modify the query to search based on bond number or any other column
-        query = f"SELECT * FROM table_name WHERE bond_number LIKE '%{search_query}%' OR column_name LIKE '%{search_query}%';"
+        query = f"SELECT * FROM Table_2 WHERE bond_number LIKE '%{search_query}%' OR Company name LIKE '%{search_query}%';"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
@@ -35,7 +35,7 @@ def Company():
     if request.method == "POST":
         selected_company = request.form['selected_company']
         # Fetch data from the database based on the selected company
-        # Calculate total bonds and value per year
+        # Calculate totahbkbhjl bonds and value per year
         # Generate bar plot
         # Save plot to a bytes buffer
         bytes_image = io.BytesIO()
